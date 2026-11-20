@@ -10,6 +10,7 @@ import MessagesPage from './pages/MessagesPage';
 import OverviewPage from './pages/OverviewPage';
 import ResourcePage from './pages/ResourcePage';
 import SettingsPage from './pages/SettingsPage';
+import SocialLinksPage from './pages/SocialLinksPage';
 
 /**
  * Seluruh area /admin. Dimuat lazy dari router publik, sehingga supabase-js dan kode
@@ -27,6 +28,7 @@ export default function AdminApp() {
               {resources.map((r) => (
                 <Route key={r.key} path={r.path} element={<ResourcePage key={r.key} resource={r} />} />
               ))}
+              <Route path="tautan" element={<SocialLinksPage />} />
               <Route path="pesan" element={<MessagesPage />} />
               <Route path="pengaturan" element={<SettingsPage />} />
               <Route path="*" element={<AdminNotFound />} />

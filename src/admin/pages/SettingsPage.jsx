@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabase';
 import { supabaseEnv } from '@/lib/supabaseConfig';
 import { useSupabaseStatus } from '@/hooks/useSupabaseStatus';
 import { formatDateTime } from '@/lib/admin/format';
+import { adminNav } from '../config/nav';
 import { useAuth } from '../auth/AuthContext';
 import { mapAuthError } from '../auth/errors';
 import { useAdminTitle } from '../hooks/useAdminTitle';
@@ -35,6 +36,7 @@ const Row = ({ label, children }) => (
 
 export default function SettingsPage() {
   useAdminTitle('Pengaturan');
+  const index = adminNav.find((n) => n.key === 'pengaturan')?.index;
   const { user, signOut } = useAuth();
   const toast = useToast();
   const status = useSupabaseStatus();
@@ -85,7 +87,7 @@ export default function SettingsPage() {
 
   return (
     <>
-      <AdminPageHeader index="10" title="Pengaturan" description="Akun admin, keamanan, dan status koneksi." />
+      <AdminPageHeader index={index} title="Pengaturan" description="Akun admin, keamanan, dan status koneksi." />
 
       <Section title="Akun" description="Identitas admin yang sedang masuk.">
         <dl className="border-t border-ink">

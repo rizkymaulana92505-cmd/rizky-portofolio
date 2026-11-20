@@ -3,6 +3,7 @@ import { Archive, Eye, EyeOff, Mail, Trash2 } from 'lucide-react';
 import { messageCategories } from '@/data';
 import { messagesAdmin } from '@/services/admin/messages';
 import { formatDateTime } from '@/lib/admin/format';
+import { adminNav } from '../config/nav';
 import { useResourceList } from '../hooks/useResourceList';
 import { useAdminTitle } from '../hooks/useAdminTitle';
 import AdminPageHeader from '../components/PageHeader';
@@ -25,6 +26,7 @@ const FILTERS = [
 /** Kotak masuk: baca detail, ubah status (baru / dibaca / diarsipkan), balas lewat email, hapus. */
 export default function MessagesPage() {
   useAdminTitle('Pesan masuk');
+  const index = adminNav.find((n) => n.key === 'pesan')?.index;
   const toast = useToast();
   const list = useResourceList(messagesAdmin, { pageSize: 10 });
   const [open, setOpen] = useState(null);
@@ -82,7 +84,7 @@ export default function MessagesPage() {
 
   return (
     <>
-      <AdminPageHeader index="09" title="Pesan masuk" description="Kesan dan pesan dari formulir kontak. Hanya admin yang dapat membaca pesan; email pengirim tidak pernah tampil di halaman publik." />
+      <AdminPageHeader index={index} title="Pesan masuk" description="Kesan dan pesan dari formulir kontak. Hanya admin yang dapat membaca pesan; email pengirim tidak pernah tampil di halaman publik." />
 
       <div className="mt-8">
         <ListToolbar list={list} searchLabel="Cari nama, email, subjek, atau isi…" filters={FILTERS} />

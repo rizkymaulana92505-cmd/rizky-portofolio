@@ -79,9 +79,9 @@ export default function Repeater({ field, value, onChange, errors, 'data-field':
         <Plus size={14} aria-hidden /> {field.addLabel ?? 'Tambah baris'}
       </button>
 
-      {Array.isArray(errors) && errors.length > 0 && (
+      {errors && (Array.isArray(errors) ? errors : [errors]).length > 0 && (
         <ul id={`${field.name}-error`} className="mt-2 space-y-1">
-          {errors.map((e) => <li key={e}><FieldMessage id={`${field.name}-${e.length}`} error={e} /></li>)}
+          {(Array.isArray(errors) ? errors : [errors]).map((e) => <li key={e}><FieldMessage id={`${field.name}-${e.length}`} error={e} /></li>)}
         </ul>
       )}
     </div>

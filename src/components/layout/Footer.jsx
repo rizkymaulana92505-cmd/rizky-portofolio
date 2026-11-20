@@ -1,12 +1,19 @@
 import { Link } from 'react-router-dom';
+import { ArrowUpRight, Github, Instagram, Linkedin } from 'lucide-react';
 import { sectionPages } from '@/data';
+import { useAsyncData } from '@/hooks/useAsyncData';
 import { useSite } from '@/hooks/useSite';
+import { getContact } from '@/services/portfolioService';
 import Container from '@/components/ui/Container';
 import Reveal from '@/components/motion/Reveal';
+
+const socialIcons = { github: Github, instagram: Instagram, linkedin: Linkedin };
 
 export default function Footer() {
   const site = useSite();
   const year = new Date().getFullYear();
+  const { data: contact } = useAsyncData(getContact, []);
+  const socials = contact?.socials ?? [];
 
   return (
     <footer className="relative z-10 border-t border-ink bg-paper">
@@ -17,6 +24,26 @@ export default function Footer() {
             <p className="mt-4 max-w-sm text-lead">
               {site.name}. {site.className}, {site.school}.
             </p>
+            {socials.length > 0 && (
+              <ul className="mt-6 flex flex-wrap gap-3">
+                {socials.map((social) => {
+                  const Icon = socialIcons[social.id] ?? ArrowUpRight;
+                  return (
+                    <li key={social.id}>
+                      <a
+                        href={social.url}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        aria-label={`${social.label} (tab baru)`}
+                        className="inline-flex h-11 w-11 items-center justify-center border border-line-strong transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+                      >
+                        <Icon size={18} strokeWidth={1.5} aria-hidden />
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </div>
 
           <nav aria-label="Navigasi footer" className="col-span-12 md:col-span-5 md:col-start-7">

@@ -40,11 +40,11 @@ const profiles = {
     { name: 'class_name', label: 'Kelas', type: 'text', maxLength: 60 },
     { name: 'major', label: 'Jurusan', type: 'text', maxLength: 120 },
     { name: 'location', label: 'Domisili', type: 'text', maxLength: 120 },
-    { type: 'section', name: 's-kontak', label: 'Kontak & media' },
-    { name: 'email', label: 'Email kontak publik', type: 'email', maxLength: 120, hint: 'Tampil di halaman Kontak. Kosongkan bila tidak ingin dipublikasikan.' },
+    { type: 'section', name: 's-kontak', label: 'Kontak & media sosial' },
+    { name: 'email', label: 'Email kontak publik', type: 'email', maxLength: 120, hint: 'Tampil di halaman Kontak dan CV. Bisa juga diisi lewat menu Tautan Sosial di sidebar.' },
     {
       name: 'social_links', label: 'Tautan sosial media', type: 'repeater', itemLabel: 'Tautan', addLabel: 'Tambah tautan',
-      hint: 'Halaman Kontak mengenali GitHub, Instagram, dan LinkedIn.',
+      hint: 'GitHub, Instagram, dan LinkedIn tampil di Kontak/CV. Cara paling cepat: menu Tautan Sosial di sidebar. URL harus diawali http:// atau https://.',
       itemFields: [
         { name: 'id', label: 'Platform', type: 'select', required: true, defaultValue: 'github', options: [{ value: 'github', label: 'GitHub' }, { value: 'instagram', label: 'Instagram' }, { value: 'linkedin', label: 'LinkedIn' }] },
         { name: 'url', label: 'URL profil', type: 'url', required: true, placeholder: 'https://…' },

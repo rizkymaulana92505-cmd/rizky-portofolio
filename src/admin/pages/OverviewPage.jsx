@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Inbox } from 'lucide-react';
+import { ArrowUpRight, Inbox, Link2 } from 'lucide-react';
 import { getOverview } from '@/services/admin/overview';
 import { formatRelative, truncate } from '@/lib/admin/format';
 import { messageCategories } from '@/data';
+import { adminNav } from '../config/nav';
 import { useAdminTitle } from '../hooks/useAdminTitle';
 import AdminPageHeader from '../components/PageHeader';
 import StatusBadge, { PublishBadge } from '../components/StatusBadge';
@@ -32,6 +33,7 @@ function Tile({ index, label, value, to, lines, loading }) {
 
 export default function OverviewPage() {
   useAdminTitle('Overview');
+  const index = adminNav.find((n) => n.key === 'overview')?.index;
   const [state, setState] = useState({ data: null, loading: true, error: null });
 
   const load = useCallback(async () => {
@@ -50,7 +52,13 @@ export default function OverviewPage() {
 
   return (
     <>
-      <AdminPageHeader index="01" title="Overview" description="Ringkasan konten dan pesan yang tersimpan di database. Semua angka dihitung langsung dari Supabase." />
+      <AdminPageHeader index={index} title="Overview" description="Ringkasan konten dan pesan yang tersimpan di database. Semua angka dihitung langsung dari Supabase." />
+
+      <div className="mt-8">
+        <Link to="/admin/tautan" className="inline-flex h-11 items-center gap-2 border border-ink bg-ink px-5 font-mono text-[11px] uppercase tracking-[0.12em] text-paper transition-colors hover:bg-ink-soft">
+          <Link2 size={14} aria-hidden /> Tambah/edit tautan sosial
+        </Link>
+      </div>
 
       {error ? (
         <div className="mt-8"><ErrorState message={error} onRetry={load} /></div>
