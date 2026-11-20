@@ -73,7 +73,7 @@ export default function ProjectItem({ project, index, onPreview }) {
           <div className={cn(wide && 'grid gap-x-8 gap-y-6 md:grid-cols-2 md:pt-8')}>
             <div>
               <div className="flex items-start justify-between gap-4 border-t border-ink pt-3">
-                <span className="font-display text-[clamp(3.5rem,8vw,6.5rem)] font-extrabold leading-[0.8] tracking-[-0.05em] text-transparent [-webkit-text-stroke:1px_#111111] font-stretch-display">
+                <span className="font-display text-[clamp(3.5rem,8vw,6.5rem)] font-extrabold leading-[0.8] tracking-[-0.05em] text-transparent text-stroke-ink font-stretch-display">
                   {number}
                 </span>
                 <div className="flex flex-col items-end gap-1 text-right">

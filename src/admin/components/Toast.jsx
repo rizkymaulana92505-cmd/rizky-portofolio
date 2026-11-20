@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { AlertCircle, Check, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
@@ -16,6 +16,11 @@ export function useToast() {
 export function ToastProvider({ children }) {
   const [items, setItems] = useState([]);
   const timers = useRef(new Map());
+
+  useEffect(() => () => {
+    timers.current.forEach(clearTimeout);
+    timers.current.clear();
+  }, []);
 
   const dismiss = useCallback((id) => {
     clearTimeout(timers.current.get(id));
@@ -40,7 +45,7 @@ export function ToastProvider({ children }) {
   return (
     <ToastContext.Provider value={api}>
       {children}
-      <div className="pointer-events-none fixed inset-x-4 bottom-4 z-[120] flex flex-col items-stretch gap-2 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-96">
+      <div className="pointer-events-none fixed inset-x-4 bottom-4 z-[105] flex flex-col items-stretch gap-2 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-96">
         <AnimatePresence>
           {items.map((t) => (
             <motion.div
@@ -61,7 +66,7 @@ export function ToastProvider({ children }) {
                 <Check size={18} strokeWidth={2} aria-hidden className="mt-0.5 shrink-0" />
               )}
               <p className="min-w-0 flex-1 font-medium">{t.message}</p>
-              <button type="button" onClick={() => dismiss(t.id)} aria-label="Tutup notifikasi" className="shrink-0 opacity-70 hover:opacity-100">
+              <button type="button" onClick={() => dismiss(t.id)} aria-label="Tutup notifikasi" className="-m-2 shrink-0 p-2 opacity-70 hover:opacity-100">
                 <X size={16} strokeWidth={2} aria-hidden />
               </button>
             </motion.div>

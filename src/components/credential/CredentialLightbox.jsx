@@ -16,11 +16,10 @@ import ProjectImage from '@/components/project/ProjectImage';
  */
 export default function CredentialLightbox({ items, index, onIndexChange, onClose }) {
   const panelRef = useRef(null);
-  const closeRef = useRef(null);
   const item = index !== null ? items[index] : null;
   const total = items.length;
 
-  useDialog({ open: Boolean(item), onClose, panelRef, initialFocusRef: closeRef });
+  useDialog({ open: Boolean(item), onClose, panelRef });
 
   const go = useCallback(
     (step) => onIndexChange((index + step + total) % total),
@@ -50,13 +49,14 @@ export default function CredentialLightbox({ items, index, onIndexChange, onClos
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3, ease }}
         >
-          <div aria-hidden onClick={onClose} className="absolute inset-0 cursor-zoom-out bg-ink/80 backdrop-blur-[2px]" />
+          <div aria-hidden onClick={onClose} className="absolute inset-0 cursor-zoom-out bg-scrim/80 backdrop-blur-[2px]" />
 
           <motion.div
             ref={panelRef}
             role="dialog"
             aria-modal="true"
             aria-label={`Gambar: ${item.title ?? item.titleHint}`}
+            tabIndex={-1}
             className="relative grid max-h-[94vh] w-full max-w-6xl grid-cols-12 overflow-y-auto border border-ink bg-paper md:max-h-[88vh]"
             initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -89,7 +89,6 @@ export default function CredentialLightbox({ items, index, onIndexChange, onClos
                   <span className="text-ink">{number}</span> / {padIndex(total)} — {item.kind}
                 </p>
                 <button
-                  ref={closeRef}
                   type="button"
                   onClick={onClose}
                   aria-label="Tutup"

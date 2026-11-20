@@ -5,7 +5,7 @@ const wordCount = (text) => (text ?? '').trim().split(/\s+/).filter(Boolean).len
 /** Estimasi menit baca dari blok konten (kode dihitung setengah). Minimal 1. */
 export function readingMinutes(post) {
   const words = (post.content ?? []).reduce((sum, b) => {
-    if (b.type === 'list') return sum + b.items.reduce((s, i) => s + wordCount(i), 0);
+    if (b.type === 'list') return sum + (b.items ?? []).reduce((s, i) => s + wordCount(i), 0);
     if (b.type === 'code') return sum + wordCount(b.code) / 2;
     return sum + wordCount(b.text);
   }, 0);

@@ -26,6 +26,11 @@ const CONSTRAINTS = {
   blog_slug_format: { field: 'slug', message: 'Slug hanya boleh huruf kecil, angka, dan tanda hubung.' },
   experiences_date_order: { field: 'end_date', message: 'Tanggal selesai tidak boleh sebelum tanggal mulai.' },
   skills_level_range: { field: 'level', message: 'Level harus antara 0 dan 100.' },
+  testimonials_type_valid: { field: 'type', message: 'Jenis testimoni tidak dikenal.' },
+  testimonials_name_len: { field: 'name', message: 'Nama harus antara 1 dan 120 karakter.' },
+  testimonials_role_len: { field: 'role', message: 'Peran maksimal 120 karakter.' },
+  testimonials_organization_len: { field: 'organization', message: 'Instansi maksimal 120 karakter.' },
+  testimonials_message_len: { field: 'message', message: 'Isi testimoni maksimal 2000 karakter.' },
 };
 
 const NETWORK_RE = /failed to fetch|networkerror|load failed|network request failed/i;

@@ -110,8 +110,13 @@ function Testimonials({ data }) {
       <div key={type} className="mt-12 grid grid-cols-12 gap-x-4 gap-y-14 md:mt-16 md:gap-y-20">
         {shown.map((item, i) => {
           const meta = testimonialTypes.find((t) => t.key === item.type);
-          return <TestimonialItem key={item.id} item={item} index={i} typeLabel={meta.label} roleHint={meta.roleHint} />;
+          return <TestimonialItem key={item.id} item={item} index={i} typeLabel={meta?.label ?? item.type} roleHint={meta?.roleHint} />;
         })}
+        {shown.length === 0 && (
+          <p className="col-span-12 border border-dashed border-line-strong px-6 py-12 text-center text-small text-ink-soft">
+            Belum ada testimoni untuk ditampilkan.
+          </p>
+        )}
       </div>
     </>
   );

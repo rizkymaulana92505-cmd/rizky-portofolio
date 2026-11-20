@@ -91,8 +91,7 @@ export function mapContact(row) {
 
 /**
  * Bentuk sama dengan src/data/resume.js. Tanpa profil terbit → data lokal.
- * Profil ada tetapi `cv_url` kosong → `cvFile: null` (halaman CV menyembunyikan tombol unduh,
- * tidak mengarah ke berkas placeholder).
+ * Profil ada tetapi `cv_url` kosong → memakai berkas CV lokal yang sudah disiapkan.
  */
 export function mapResume(row) {
   if (!row) return localResume;

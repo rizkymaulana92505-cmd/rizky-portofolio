@@ -13,7 +13,7 @@ export default function Marquee({ items, duration = 40, className }) {
           <span
             className={cn(
               'px-6 md:px-10',
-              i % 2 === 1 && 'text-transparent [-webkit-text-stroke:1px_#111111]',
+              i % 2 === 1 && 'text-transparent text-stroke-ink',
             )}
           >
             {text}

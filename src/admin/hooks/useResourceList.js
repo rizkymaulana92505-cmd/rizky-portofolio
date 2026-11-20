@@ -34,8 +34,11 @@ export function useResourceList(service, { pageSize = 10 } = {}) {
       const result = await service.list({ page, pageSize, search, filters, published });
       if (id !== seq.current) return;
       if (result.rows.length === 0 && result.total > 0 && page > 1) {
-        setPage(Math.max(1, Math.ceil(result.total / pageSize)));
-        return;
+        const target = Math.min(page, Math.max(1, Math.ceil(result.total / pageSize)));
+        if (target !== page) {
+          setPage(target);
+          return;
+        }
       }
       setData(result);
       setLoading(false);

@@ -6,7 +6,7 @@ import SectionHeading from '@/components/ui/SectionHeading';
 /** Kepala halaman standar (judul <h1> editorial + meta dari navigation.js). */
 export default function PageHeader({ pageKey, title, description }) {
   const page = getPage(pageKey);
-  usePageTitle(page.label);
+  usePageTitle(title ?? page.label);
 
   return (
     <section className="pt-16 md:pt-24">

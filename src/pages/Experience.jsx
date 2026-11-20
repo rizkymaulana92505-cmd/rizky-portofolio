@@ -98,7 +98,7 @@ function ExperienceContent({ data }) {
                 aria-selected={active}
                 onClick={() => setFilter(tab.key)}
                 className={cn(
-                  'relative pb-3 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-300',
+                  'relative flex min-h-10 items-center pb-3 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-300',
                   active ? 'text-ink' : 'text-mute hover:text-ink',
                 )}
               >

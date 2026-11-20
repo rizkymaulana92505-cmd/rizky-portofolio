@@ -24,10 +24,15 @@ export default function Navbar() {
   useEffect(() => {
     if (!open) return undefined;
     const onKey = (e) => e.key === 'Escape' && setOpen(false);
-    document.body.style.overflow = 'hidden';
+    const { body } = document;
+    const scrollbar = window.innerWidth - document.documentElement.clientWidth;
+    const prev = { overflow: body.style.overflow, paddingRight: body.style.paddingRight };
+    body.style.overflow = 'hidden';
+    if (scrollbar > 0) body.style.paddingRight = `${scrollbar}px`;
     window.addEventListener('keydown', onKey);
     return () => {
-      document.body.style.overflow = '';
+      body.style.overflow = prev.overflow;
+      body.style.paddingRight = prev.paddingRight;
       window.removeEventListener('keydown', onKey);
     };
   }, [open]);
@@ -37,7 +42,7 @@ export default function Navbar() {
       <header className="fixed inset-x-0 top-0 z-50 h-nav border-b border-line bg-paper/90 backdrop-blur">
         <Container className="flex h-full items-center justify-between">
           {/* Logo: monogram inisial + nama */}
-          <Link to="/" className="group flex items-center gap-3" aria-label={`${site.name} — Beranda`}>
+          <Link to="/" className="group flex min-h-10 min-w-10 items-center gap-3" aria-label={`${site.name} — Beranda`}>
             <span
               aria-hidden
               className="flex h-9 w-9 items-center justify-center border border-ink bg-ink font-display text-sm font-extrabold tracking-tight text-paper transition-colors duration-300 ease-editorial group-hover:bg-paper group-hover:text-ink"

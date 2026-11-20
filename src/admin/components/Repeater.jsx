@@ -41,7 +41,7 @@ export default function Repeater({ field, value, onChange, errors, 'data-field':
     [next[index], next[target]] = [next[target], next[index]];
     onChange(next);
   };
-  const iconBtn = 'flex h-9 w-9 items-center justify-center border border-transparent transition-colors hover:border-ink disabled:pointer-events-none disabled:opacity-30';
+  const iconBtn = 'flex h-10 w-10 items-center justify-center border border-transparent transition-colors hover:border-ink disabled:pointer-events-none disabled:opacity-30';
 
   return (
     <div>

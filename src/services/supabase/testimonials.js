@@ -1,14 +1,18 @@
 import { BUCKETS, resolveImageUrl, table, unwrap } from './core';
 
+const clean = (value) => (typeof value === 'string' ? value.trim() : '');
+const optional = (value) => clean(value) || null;
+
 /** Bentuk sama dengan src/data/testimonials.js. */
 export async function submitTestimonial(draft) {
-  const { type, name, role, organization, message } = draft;
+  const { type, name, role, organization, message, consent } = draft;
   unwrap(await table('testimonials').insert({
-    type,
-    name,
-    role: role || null,
-    organization: organization || null,
-    message,
+    type: clean(type),
+    name: clean(name),
+    role: optional(role),
+    organization: optional(organization),
+    message: clean(message),
+    consent_at: consent ? new Date().toISOString() : null,
   }));
   return { simulated: false };
 }

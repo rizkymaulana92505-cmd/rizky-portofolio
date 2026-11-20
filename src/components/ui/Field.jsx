@@ -20,7 +20,7 @@ export function FieldMessage({ id, error, hint }) {
 const control =
   'block w-full rounded-none border-0 border-b bg-transparent px-0 py-3 text-lead text-ink placeholder:text-mute/70 ' +
   'outline-none transition-[border-color,box-shadow] duration-300 ease-editorial ' +
-  'hover:border-ink focus:border-ink focus:shadow-[0_1px_0_0_#111111] disabled:cursor-not-allowed disabled:opacity-60';
+  'hover:border-ink focus:border-ink focus:shadow-[0_1px_0_0_rgb(var(--color-ink))] disabled:cursor-not-allowed disabled:opacity-60';
 
 /**
  * Field minimalis bergaris bawah. as="input" (default) atau as="textarea".

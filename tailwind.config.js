@@ -20,6 +20,7 @@ export default {
         mute: 'rgb(var(--color-mute) / <alpha-value>)',
         fog: 'rgb(var(--color-fog) / <alpha-value>)',
         line: { DEFAULT: 'rgb(var(--color-line) / <alpha-value>)', strong: 'rgb(var(--color-line-strong) / <alpha-value>)' },
+        scrim: 'rgb(var(--color-scrim) / <alpha-value>)',
       },
       fontFamily: {
         display: ['Archivo', 'Helvetica Neue', 'Arial', 'sans-serif'],

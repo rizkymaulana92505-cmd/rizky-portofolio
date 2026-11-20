@@ -10,7 +10,7 @@ export default function Footer() {
 
   return (
     <footer className="relative z-10 border-t border-ink bg-paper">
-      <Container className="pt-16 md:pt-24">
+      <Container className="pb-24 pt-16 md:pb-28 md:pt-24">
         <div className="grid grid-cols-12 gap-x-4 gap-y-12">
           <div className="col-span-12 md:col-span-5">
             <p className="label">Portofolio</p>
@@ -26,7 +26,7 @@ export default function Footer() {
                 <li key={item.key}>
                   <Link
                     to={item.path}
-                    className="flex items-baseline gap-3 py-1 transition-colors hover:text-mute"
+                    className="flex items-baseline gap-3 py-2 transition-colors hover:text-mute"
                   >
                     <span className="label">{item.index}</span>
                     <span className="font-display text-xl font-bold uppercase tracking-tight">{item.label}</span>

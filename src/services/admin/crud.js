@@ -30,8 +30,10 @@ export function createCrudService({ table: name, select = '*', orderBy = [{ colu
       orderBy.forEach((o) => {
         q = q.order(o.column, { ascending: o.ascending ?? true, nullsFirst: o.nullsFirst });
       });
-      const from = (page - 1) * pageSize;
-      const { data, count } = await run(q.range(from, from + pageSize - 1));
+      const safePage = Math.max(1, Math.floor(Number(page)) || 1);
+      const safePageSize = Math.max(1, Math.floor(Number(pageSize)) || 10);
+      const from = (safePage - 1) * safePageSize;
+      const { data, count } = await run(q.range(from, from + safePageSize - 1));
       return { rows: data ?? [], total: count ?? 0 };
     },
 

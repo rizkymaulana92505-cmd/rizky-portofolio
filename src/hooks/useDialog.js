@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
@@ -7,6 +7,9 @@ const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1
  * fokus awal ke `initialFocusRef`, dan kembalikan fokus ke pemicu saat ditutup.
  */
 export function useDialog({ open, onClose, panelRef, initialFocusRef }) {
+  const onCloseRef = useRef(onClose);
+  useEffect(() => { onCloseRef.current = onClose; }, [onClose]);
+
   useEffect(() => {
     if (!open) return undefined;
 
@@ -16,11 +19,12 @@ export function useDialog({ open, onClose, panelRef, initialFocusRef }) {
     const prev = { overflow: body.style.overflow, paddingRight: body.style.paddingRight };
     body.style.overflow = 'hidden';
     if (scrollbar > 0) body.style.paddingRight = `${scrollbar}px`;
-    initialFocusRef?.current?.focus();
+    if (initialFocusRef?.current) initialFocusRef.current.focus();
+    else panelRef?.current?.focus();
 
     const onKeyDown = (e) => {
       if (e.key === 'Escape') {
-        onClose();
+        onCloseRef.current();
         return;
       }
       if (e.key !== 'Tab' || !panelRef.current) return;
@@ -44,5 +48,5 @@ export function useDialog({ open, onClose, panelRef, initialFocusRef }) {
       body.style.paddingRight = prev.paddingRight;
       trigger?.focus?.();
     };
-  }, [open, onClose, panelRef, initialFocusRef]);
+  }, [open, panelRef, initialFocusRef]);
 }

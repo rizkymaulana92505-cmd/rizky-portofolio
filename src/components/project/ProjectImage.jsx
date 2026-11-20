@@ -17,7 +17,7 @@ export default function ProjectImage({ src, alt, number, ratio = 'aspect-[4/3]',
         <div
           role="img"
           aria-label={alt}
-          className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_right,#E3E3E3_1px,transparent_1px),linear-gradient(to_bottom,#E3E3E3_1px,transparent_1px)] bg-[size:12.5%_16.66%] transition-transform duration-700 ease-editorial group-hover:scale-[1.04]"
+          className="grid-lines flex h-full w-full items-center justify-center bg-[size:12.5%_16.66%] transition-transform duration-700 ease-editorial group-hover:scale-[1.04]"
         >
           <span className="text-center">
             <span className="block font-display text-[clamp(3rem,9vw,8rem)] font-extrabold leading-none tracking-[-0.06em] text-ink/90 font-stretch-display">

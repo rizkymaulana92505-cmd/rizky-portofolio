@@ -2,14 +2,14 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { AlertCircle, Check, Loader2, RotateCcw, Send } from 'lucide-react';
 import { testimonialTypes } from '@/data';
 import { cn } from '@/lib/cn';
-import { describePublicError } from '@/lib/publicError';
+import { describePublicError, isRetryablePublicError } from '@/lib/publicError';
 import {
   FIELD_ORDER, LIMITS, emptyDraft, normalizeDraft, validateDraft,
 } from '@/lib/testimonials';
 import Button from '@/components/ui/Button';
 import Field from '@/components/ui/Field';
 
-function SuccessPanel({ simulated, onReset, onClose }) {
+function SuccessPanel({ simulated, onReset, onClose, bare }) {
   const ref = useRef(null);
   useEffect(() => { ref.current?.focus(); }, []);
 
@@ -23,7 +23,7 @@ function SuccessPanel({ simulated, onReset, onClose }) {
       </h3>
       <p className="mt-3 max-w-xl text-ink-soft">
         {simulated ? (
-          'Mode simulasi: isianmu belum dikirim ke server dan hanya tampil di browser ini. Aktifkan Supabase untuk menerima testimoni pengunjung.'
+          'Mode simulasi: isianmu belum dikirim ke server. Aktifkan Supabase untuk menerima testimoni pengunjung.'
         ) : (
           'Terima kasih. Testimoni masuk sebagai draf dan akan ditinjau pemilik portofolio sebelum ditampilkan di halaman ini.'
         )}
@@ -33,7 +33,7 @@ function SuccessPanel({ simulated, onReset, onClose }) {
           <RotateCcw size={14} strokeWidth={1.75} aria-hidden />
           Tulis lagi
         </Button>
-        <Button variant="ghost" size="sm" onClick={onClose}>Tutup</Button>
+        {!bare && <Button variant="ghost" size="sm" onClick={onClose}>Tutup</Button>}
       </div>
     </div>
   );
@@ -45,6 +45,7 @@ export default function TestimonialForm({ onSubmit, simulated = false, onClose, 
   const [status, setStatus] = useState('idle');
   const [result, setResult] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const [retryable, setRetryable] = useState(true);
   const formRef = useRef(null);
 
   const errors = useMemo(() => validateDraft(values), [values]);
@@ -81,8 +82,9 @@ export default function TestimonialForm({ onSubmit, simulated = false, onClose, 
       setResult(next);
       setStatus('success');
     } catch (err) {
-      setErrorMessage(describePublicError(err));
-      setStatus('error');
+    setErrorMessage(describePublicError(err));
+    setRetryable(isRetryablePublicError(err));
+    setStatus('error');
     }
   };
 
@@ -101,7 +103,7 @@ export default function TestimonialForm({ onSubmit, simulated = false, onClose, 
   return (
     <div className={cn(!bare && 'border border-ink bg-paper p-6 sm:p-8', className)}>
       {status === 'success' ? (
-        <SuccessPanel simulated={simulatedResult} onReset={reset} onClose={onClose} />
+        <SuccessPanel simulated={simulatedResult} onReset={reset} onClose={onClose} bare={bare} />
       ) : (
         <form ref={formRef} noValidate onSubmit={handleSubmit} aria-label="Formulir testimoni">
           <div className="flex items-start justify-between gap-4">
@@ -111,9 +113,11 @@ export default function TestimonialForm({ onSubmit, simulated = false, onClose, 
                 Tulis testimoni
               </h3>
             </div>
-            <button type="button" onClick={onClose} aria-label="Tutup formulir" className="label text-ink hover:underline">
-              Tutup
-            </button>
+            {!bare && (
+              <button type="button" onClick={onClose} aria-label="Tutup formulir" className="label text-ink hover:underline">
+                Tutup
+              </button>
+            )}
           </div>
 
           <fieldset disabled={submitting} className="mt-8 grid gap-x-8 gap-y-7 sm:grid-cols-2">
@@ -158,7 +162,10 @@ export default function TestimonialForm({ onSubmit, simulated = false, onClose, 
           {status === 'error' && (
             <p role="alert" className="mt-6 flex items-start gap-2 border border-ink p-4 text-small font-medium">
               <AlertCircle size={16} strokeWidth={2} aria-hidden className="mt-0.5 shrink-0" />
-              <span>{errorMessage || 'Testimoni belum berhasil dikirim.'} Isianmu masih tersimpan — coba lagi.</span>
+              <span>
+                {errorMessage || 'Testimoni belum berhasil dikirim.'}
+                {retryable && ' Isianmu masih tersimpan — coba lagi.'}
+              </span>
             </p>
           )}
 

@@ -17,7 +17,7 @@ function Panel({ title, subtitle, onClose, escapeDisabled, children }) {
 
   return (
     <motion.div className="fixed inset-0 z-[90]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
-      <div className="absolute inset-0 bg-ink/40" onClick={onClose} aria-hidden />
+      <div className="absolute inset-0 bg-scrim/40" onClick={onClose} aria-hidden />
       <motion.aside
         ref={panelRef}
         role="dialog"

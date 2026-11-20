@@ -16,7 +16,7 @@ function MobileMenu({ onClose, ...props }) {
   useDialog({ open: true, onClose, panelRef, initialFocusRef: closeRef });
   return (
     <motion.div className="fixed inset-0 z-[80] lg:hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
-      <div className="absolute inset-0 bg-ink/40" onClick={onClose} aria-hidden />
+      <div className="absolute inset-0 bg-scrim/40" onClick={onClose} aria-hidden />
       <motion.div
         ref={panelRef}
         role="dialog"

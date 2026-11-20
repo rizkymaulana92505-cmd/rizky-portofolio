@@ -8,7 +8,7 @@ export default function Switch({ checked, onChange, label, className }) {
       role="switch"
       aria-checked={checked}
       onClick={() => onChange(!checked)}
-      className={cn('group/switch inline-flex items-center gap-3', className)}
+      className={cn('group/switch inline-flex min-h-10 items-center gap-3 py-2', className)}
     >
       <span
         aria-hidden

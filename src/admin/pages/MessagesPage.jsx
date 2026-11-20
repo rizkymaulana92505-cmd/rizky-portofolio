@@ -47,7 +47,10 @@ export default function MessagesPage() {
     }
   };
 
-  const setStatus = (m, status, text) => act(() => messagesAdmin.setStatus(m.id, status), text);
+  const setStatus = (m, status, text) => {
+    if (status === 'new') autoRead.current.delete(m.id);
+    return act(() => messagesAdmin.setStatus(m.id, status), text);
+  };
 
   // Membuka pesan baru = membacanya. Tanpa toast; admin bisa mengembalikannya ke "Baru".
   useEffect(() => {

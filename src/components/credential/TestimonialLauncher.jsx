@@ -10,8 +10,7 @@ import TestimonialForm from './TestimonialForm';
 
 function Dialog({ onClose }) {
   const panelRef = useRef(null);
-  const closeRef = useRef(null);
-  useDialog({ open: true, onClose, panelRef, initialFocusRef: closeRef });
+  useDialog({ open: true, onClose, panelRef });
 
   return (
     <motion.div
@@ -21,28 +20,31 @@ function Dialog({ onClose }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
-      <div className="absolute inset-0 bg-ink/40" onClick={onClose} aria-hidden />
+      <div className="absolute inset-0 bg-scrim/40" onClick={onClose} aria-hidden />
       <motion.div
         ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-label="Tulis testimoni"
+        tabIndex={-1}
         initial={{ y: 32, opacity: 0 }}
         animate={{ y: 0, opacity: 1, transition: { duration: 0.4, ease } }}
         exit={{ y: 24, opacity: 0, transition: { duration: 0.2 } }}
-        className="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto border border-ink bg-paper p-5 sm:m-6 sm:p-8"
+        className="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto border border-ink bg-paper sm:m-6"
       >
-        <button
-          ref={closeRef}
-          type="button"
-          onClick={onClose}
-          aria-label="Tutup"
-          className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center border border-ink bg-paper transition-colors hover:bg-ink hover:text-paper"
-        >
-          <X size={18} aria-hidden />
-        </button>
+        <div className="sticky top-0 z-10 flex justify-end bg-paper p-3 sm:p-4">
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Tutup"
+            className="flex h-9 w-9 items-center justify-center border border-ink bg-paper transition-colors hover:bg-ink hover:text-paper"
+          >
+            <X size={18} aria-hidden />
+          </button>
+        </div>
         <TestimonialForm
           bare
+          className="px-5 pb-5 sm:px-8 sm:pb-8"
           onSubmit={submitTestimonial}
           simulated={!usesSupabaseData}
           onClose={onClose}

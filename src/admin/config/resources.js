@@ -280,7 +280,7 @@ const testimonials = {
     { name: 'type', label: 'Jenis', type: 'select', required: true, defaultValue: 'teman', options: opts(testimonialTypes) },
     { name: 'name', label: 'Nama pemberi testimoni', type: 'text', required: true, maxLength: 120 },
     { name: 'role', label: 'Peran / jabatan', type: 'text', maxLength: 120 },
-    { name: 'organization', label: 'Instansi / organisasi', type: 'text', maxLength: 160 },
+    { name: 'organization', label: 'Instansi / organisasi', type: 'text', maxLength: 120 },
     { name: 'message', label: 'Isi testimoni', type: 'textarea', required: true, rows: 5, maxLength: 2000 },
     { name: 'photo_path', label: 'Foto pemberi testimoni (opsional)', type: 'image', bucket: 'testimonial' },
     SORT,

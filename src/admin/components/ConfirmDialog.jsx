@@ -19,7 +19,7 @@ function Panel({ title, description, confirmLabel, cancelLabel, loading, onConfi
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
-      <div className="absolute inset-0 bg-ink/50" onClick={loading ? undefined : onCancel} aria-hidden />
+      <div className="absolute inset-0 bg-scrim/50" onClick={loading ? undefined : onCancel} aria-hidden />
       <motion.div
         ref={panelRef}
         role="alertdialog"

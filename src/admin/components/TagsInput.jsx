@@ -19,7 +19,7 @@ export default function TagsInput({ id, label, value, onChange, onBlur, placehol
         {value.map((tag) => (
           <span key={tag} className="inline-flex items-center gap-1 border border-ink px-2 py-1 font-mono text-[11px] uppercase tracking-[0.08em]">
             {tag}
-            <button type="button" onClick={() => onChange(value.filter((t) => t !== tag))} aria-label={`Hapus ${tag}`} className="hover:opacity-60">
+            <button type="button" onClick={() => onChange(value.filter((t) => t !== tag))} aria-label={`Hapus ${tag}`} className="-m-1 flex h-8 w-8 items-center justify-center hover:opacity-60">
               <X size={12} aria-hidden />
             </button>
           </span>

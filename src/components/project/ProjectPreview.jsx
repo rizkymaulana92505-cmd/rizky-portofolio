@@ -17,7 +17,6 @@ const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1
  */
 export default function ProjectPreview({ project, index = 0, onClose }) {
   const panelRef = useRef(null);
-  const closeRef = useRef(null);
   const open = Boolean(project);
 
   useEffect(() => {
@@ -29,7 +28,7 @@ export default function ProjectPreview({ project, index = 0, onClose }) {
     const prev = { overflow: body.style.overflow, paddingRight: body.style.paddingRight };
     body.style.overflow = 'hidden';
     if (scrollbar > 0) body.style.paddingRight = `${scrollbar}px`;
-    closeRef.current?.focus();
+    panelRef.current?.focus();
 
     const onKeyDown = (e) => {
       if (e.key === 'Escape') {
@@ -74,13 +73,14 @@ export default function ProjectPreview({ project, index = 0, onClose }) {
           transition={{ duration: 0.3, ease }}
         >
           {/* Latar gelap — klik untuk menutup */}
-          <div aria-hidden onClick={onClose} className="absolute inset-0 cursor-pointer bg-ink/70 backdrop-blur-[2px]" />
+          <div aria-hidden onClick={onClose} className="absolute inset-0 cursor-pointer bg-scrim/70 backdrop-blur-[2px]" />
 
           <motion.div
             ref={panelRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="preview-judul"
+            tabIndex={-1}
             className="relative grid max-h-[92vh] w-full max-w-5xl grid-cols-12 overflow-y-auto border border-ink bg-paper md:max-h-[85vh]"
             initial={{ y: 48, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -103,7 +103,6 @@ export default function ProjectPreview({ project, index = 0, onClose }) {
                   <span className="text-ink">{padIndex(index + 1)}</span> — {category ?? <Placeholder>Kategori</Placeholder>}
                 </p>
                 <button
-                  ref={closeRef}
                   type="button"
                   onClick={onClose}
                   aria-label="Tutup pratinjau"

@@ -14,7 +14,7 @@ function Chip({ active, disabled, onClick, children, count }) {
       disabled={disabled}
       onClick={onClick}
       className={cn(
-        'relative border px-3 py-2 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-300',
+        'relative inline-flex min-h-10 items-center border px-3 py-2 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-300',
         active ? 'border-ink bg-ink text-paper' : 'border-line-strong text-ink hover:border-ink',
         disabled && 'cursor-not-allowed border-dashed text-mute hover:border-line-strong',
       )}
@@ -62,7 +62,7 @@ export default function ProjectFilters({ projects, technologies, filters, onChan
             type="button"
             onClick={() => onChange({ query: '' })}
             aria-label="Hapus kata kunci"
-            className="mb-2 p-1 transition-transform duration-300 ease-editorial hover:rotate-90"
+            className="mb-2 flex h-10 w-10 items-center justify-center transition-transform duration-300 ease-editorial hover:rotate-90"
           >
             <X size={20} strokeWidth={1.5} />
           </button>

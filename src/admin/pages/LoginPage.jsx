@@ -83,7 +83,7 @@ export default function LoginPage() {
             <p role="alert" className="mt-6 flex items-start gap-2 border border-ink p-4 text-small font-medium">
               <AlertCircle size={16} strokeWidth={2} aria-hidden className="mt-0.5 shrink-0" />
               <span className="flex-1">Sesi Anda telah berakhir. Silakan masuk kembali.</span>
-              <button type="button" onClick={dismissExpired} className="font-mono text-[10px] uppercase underline">Tutup</button>
+              <button type="button" onClick={dismissExpired} className="min-h-8 px-2 font-mono text-[10px] uppercase underline">Tutup</button>
             </p>
           )}
           {unconfigured && (
@@ -94,7 +94,7 @@ export default function LoginPage() {
           {forbidden && (
             <div role="alert" className="mt-6 border border-ink p-4 text-small">
               <p className="font-medium">Akun ini berhasil masuk, tetapi bukan admin situs ini.</p>
-              <button type="button" onClick={() => signOut()} className="mt-3 font-mono text-[11px] uppercase tracking-[0.12em] underline">Keluar</button>
+              <button type="button" onClick={() => signOut()} className="mt-3 inline-flex min-h-10 items-center font-mono text-[11px] uppercase tracking-[0.12em] underline">Keluar</button>
             </div>
           )}
           {formError && (
@@ -116,7 +116,7 @@ export default function LoginPage() {
                 value={password} onChange={(e) => setPassword(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, password: true }))}
                 error={touched.password ? errors.password : undefined}
               />
-              <button type="button" onClick={() => setShow((s) => !s)} className="mt-2 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] hover:underline" aria-pressed={show}>
+              <button type="button" onClick={() => setShow((s) => !s)} className="mt-2 inline-flex min-h-10 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] hover:underline" aria-pressed={show}>
                 {show ? <EyeOff size={14} aria-hidden /> : <Eye size={14} aria-hidden />}
                 {show ? 'Sembunyikan' : 'Tampilkan'} kata sandi
               </button>

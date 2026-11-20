@@ -19,7 +19,7 @@ export default function PortraitFrame({ src, alt, monogram = 'RM', figure = 'Fig
           <div
             role="img"
             aria-label={alt}
-            className="flex h-full w-full items-center justify-center bg-fog bg-[linear-gradient(to_right,#E3E3E3_1px,transparent_1px),linear-gradient(to_bottom,#E3E3E3_1px,transparent_1px)] bg-[size:25%_20%]"
+            className="grid-lines flex h-full w-full items-center justify-center bg-fog bg-[size:25%_20%]"
           >
             <span className="font-display text-[clamp(2.5rem,7vw,6rem)] font-extrabold tracking-[-0.06em] font-stretch-display">
               {monogram}
