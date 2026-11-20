@@ -5,7 +5,7 @@ import {
 } from '@/services/portfolioService';
 import { getInitials } from '@/lib/site';
 import { useAsyncData } from '@/hooks/useAsyncData';
-import { formatPeriod, hasNumber } from '@/lib/format';
+import { clampPercent, formatPeriod, hasNumber } from '@/lib/format';
 import { groupSkills } from '@/lib/skills';
 import { sortByStartDesc, toEntryProps } from '@/lib/experience';
 import { getCategoryLabel, padIndex } from '@/lib/projects';
@@ -15,6 +15,7 @@ import ContentBlock from '@/components/ui/ContentBlock';
 import DataBoundary from '@/components/ui/DataBoundary';
 import Placeholder from '@/components/ui/Placeholder';
 import PortraitFrame from '@/components/ui/PortraitFrame';
+import ProgressBar from '@/components/ui/ProgressBar';
 import TimelineEntry from '@/components/ui/TimelineEntry';
 import Button from '@/components/ui/Button';
 import Reveal from '@/components/motion/Reveal';
@@ -122,7 +123,7 @@ function CVContent({ data: [resume, about, skills, experiences, projects, contac
           {/* Isi CV */}
           <div className="col-span-12 space-y-20 md:col-span-7 md:col-start-6 md:space-y-28">
             <ContentBlock index="01" title="Profil">
-              {summary && <p className="max-w-xl font-display text-[clamp(1.5rem,2.8vw,2.25rem)] font-bold leading-[1.15] tracking-tight">{summary}</p>}
+              {summary && <p className="max-w-xl text-ink-soft">{summary}</p>}
               {!summary && <Empty>Ringkasan profil belum diisi</Empty>}
             </ContentBlock>
 
@@ -149,13 +150,18 @@ function CVContent({ data: [resume, about, skills, experiences, projects, contac
               ) : (
               <div className="space-y-8">
                 {hard.map(({ group, items }) => (
-                  <div key={group} className="grid grid-cols-12 gap-x-4 gap-y-2 border-t border-line pt-4">
+                  <div key={group} className="grid grid-cols-12 gap-x-4 gap-y-3 border-t border-line pt-4">
                     <p className="label col-span-12 text-ink md:col-span-3">{group}</p>
-                    <ul className="col-span-12 flex flex-wrap gap-2 md:col-span-9">
+                    <ul className="col-span-12 grid gap-x-6 gap-y-4 sm:grid-cols-2 md:col-span-9">
                       {items.map((s) => (
-                        <li key={s.id} className="border border-ink px-3 py-2 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-300 hover:bg-ink hover:text-paper">
-                          {s.name}
-                          {hasNumber(s.level) && <span className="ml-2 text-mute">{s.level}%</span>}
+                        <li key={s.id}>
+                          <div className="flex items-baseline justify-between gap-3">
+                            <span className="font-mono text-[11px] uppercase tracking-[0.12em]">{s.name}</span>
+                            <span className="font-mono text-[11px] tabular-nums text-ink">
+                              {hasNumber(s.level) ? `${clampPercent(s.level)}%` : '—'}
+                            </span>
+                          </div>
+                          <ProgressBar value={s.level} label={`${s.name} — CV`} className="mt-2" />
                         </li>
                       ))}
                     </ul>
@@ -164,7 +170,16 @@ function CVContent({ data: [resume, about, skills, experiences, projects, contac
                 {soft.length > 0 && (
                 <div className="grid grid-cols-12 gap-x-4 gap-y-2 border-t border-line pt-4">
                   <p className="label col-span-12 text-ink md:col-span-3">Soft Skills</p>
-                  <p className="col-span-12 text-ink-soft md:col-span-9">{soft.map((s) => s.name).join(' · ')}</p>
+                  <ul className="col-span-12 flex flex-wrap gap-x-6 gap-y-2 md:col-span-9">
+                    {soft.map((s) => (
+                      <li key={s.id} className="font-mono text-[11px] uppercase tracking-[0.12em]">
+                        {s.name}
+                        <span className="ml-2 tabular-nums text-ink">
+                          {hasNumber(s.level) ? `${clampPercent(s.level)}%` : '—'}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
                 )}
               </div>

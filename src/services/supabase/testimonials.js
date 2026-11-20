@@ -1,6 +1,18 @@
 import { BUCKETS, resolveImageUrl, table, unwrap } from './core';
 
 /** Bentuk sama dengan src/data/testimonials.js. */
+export async function submitTestimonial(draft) {
+  const { type, name, role, organization, message } = draft;
+  unwrap(await table('testimonials').insert({
+    type,
+    name,
+    role: role || null,
+    organization: organization || null,
+    message,
+  }));
+  return { simulated: false };
+}
+
 export async function getTestimonials() {
   const rows = unwrap(
     await table('testimonials')

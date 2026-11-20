@@ -4,14 +4,17 @@
 
 /* ============================================================
    DESIGN TOKENS (CSS variables)
-   Selaras dengan tailwind.config.js. Hanya mode terang.
+   Selaras dengan tailwind.config.js. Nilai warna = kanal RGB
+   (bukan hex) agar bisa dipakai Tailwind dengan /alpha.
    ============================================================ */
 :root {
-  --color-paper: #fafafa;
-  --color-ink: #111111;
-  --color-ink-soft: #3d3d3d;
-  --color-mute: #8a8a8a;
-  --color-line: #e3e3e3;
+  --color-paper: 250 250 250;
+  --color-ink: 17 17 17;
+  --color-ink-soft: 61 61 61;
+  --color-mute: 138 138 138;
+  --color-fog: 240 240 240;
+  --color-line: 227 227 227;
+  --color-line-strong: 207 207 207;
 
   --nav-height: 4rem;
   --gutter: clamp(1.25rem, 4vw, 3rem);
@@ -19,6 +22,18 @@
   --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
 
   color-scheme: light;
+}
+
+.dark {
+  --color-paper: 17 17 17;
+  --color-ink: 250 250 250;
+  --color-ink-soft: 212 212 212;
+  --color-mute: 155 155 155;
+  --color-fog: 28 28 28;
+  --color-line: 59 59 59;
+  --color-line-strong: 92 92 92;
+
+  color-scheme: dark;
 }
 
 @layer base {
@@ -52,7 +67,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-ink);
+    outline: 2px solid rgb(var(--color-ink));
     outline-offset: 3px;
   }
 
@@ -71,6 +86,20 @@
 
   .font-stretch-display {
     font-stretch: 88%;
+  }
+
+  .track-dashed {
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgb(var(--color-line-strong)) 0,
+      rgb(var(--color-line-strong)) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+  }
+
+  .text-stroke-ink {
+    -webkit-text-stroke: 1px rgb(var(--color-ink));
   }
 
   .skip-link {

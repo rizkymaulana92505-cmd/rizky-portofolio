@@ -99,7 +99,7 @@ export default function ResourceForm({
     if (f.showIf && !f.showIf(values)) return null;
     const id = `f-${f.name}`;
     const error = shown(f.name);
-    const common = { id, label: f.label, required: f.required, hint: f.hint, error, placeholder: f.placeholder, 'data-field': f.name };
+    const common = { id, label: f.label, required: f.required, hint: f.hint, error, placeholder: f.placeholder, suffix: f.suffix, 'data-field': f.name };
     const bind = { value: values[f.name], onChange: (e) => change(f.name, e.target.value), onBlur: () => touch(f.name) };
     const counter = f.maxLength && ['text', 'textarea', 'slug', 'url'].includes(f.type)
       ? { current: values[f.name].length, max: f.maxLength } : undefined;

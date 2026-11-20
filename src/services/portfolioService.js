@@ -50,6 +50,10 @@ export const getExperiences = source(() => resolve(experiences), remote((m) => m
 export const getCertificates = source(() => resolve(certificates), remote((m) => m.certificates.getCertificates));
 export const getAchievements = source(() => resolve(achievements), remote((m) => m.certificates.getAchievements));
 export const getTestimonials = source(() => resolve(testimonials), remote((m) => m.testimonials.getTestimonials));
+export const submitTestimonial = source(
+  async () => ({ simulated: true }),
+  remote((m) => m.testimonials.submitTestimonial),
+);
 export const getPosts = source(() => resolve(posts), remote((m) => m.blog.getPosts));
 export const getPostBySlug = source(
   (slug) => resolve(posts.find((p) => p.slug === slug) ?? null),

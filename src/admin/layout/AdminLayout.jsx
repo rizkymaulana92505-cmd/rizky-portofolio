@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ExternalLink, Menu, X } from 'lucide-react';
 import { useDialog } from '@/hooks/useDialog';
 import { ease } from '@/lib/motion';
+import ThemeToggle from '@/components/ui/ThemeToggle';
 import { useAuth } from '../auth/AuthContext';
 import { adminNav } from '../config/nav';
 import Sidebar from './Sidebar';
@@ -83,6 +84,7 @@ export default function AdminLayout() {
             </p>
           </div>
           <div className="flex shrink-0 items-center gap-4">
+            <ThemeToggle />
             <Link to="/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] hover:underline">
               <span className="hidden sm:inline">Lihat situs</span> <ExternalLink size={14} aria-hidden />
               <span className="sr-only">(tab baru)</span>

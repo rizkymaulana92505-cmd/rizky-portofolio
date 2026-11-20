@@ -21,8 +21,9 @@ export const skillCategories = [
 
 /** @type {Skill[]} */
 export const skills = [
-  { id: 'html-css', name: 'HTML & CSS', category: 'hard', group: 'Frontend', level: null },
-  { id: 'javascript', name: 'JavaScript', category: 'hard', group: 'Frontend', level: null },
+  { id: 'html', name: 'HTML', category: 'hard', group: 'Frontend', level: 80 },
+  { id: 'css', name: 'CSS', category: 'hard', group: 'Frontend', level: 70 },
+  { id: 'javascript', name: 'JavaScript', category: 'hard', group: 'Frontend', level: 65 },
   { id: 'react', name: 'React JS', category: 'hard', group: 'Frontend', level: null },
   { id: 'php', name: 'PHP', category: 'hard', group: 'Backend', level: null },
   { id: 'laravel', name: 'Laravel', category: 'hard', group: 'Backend', level: null },

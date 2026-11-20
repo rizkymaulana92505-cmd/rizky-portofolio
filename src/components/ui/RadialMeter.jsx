@@ -28,7 +28,7 @@ export default function RadialMeter({ value, label, delay = 0, className }) {
           cx="50"
           cy="50"
           r="44"
-          stroke={filled ? '#E3E3E3' : '#CFCFCF'}
+          className={filled ? 'stroke-line' : 'stroke-line-strong'}
           strokeWidth="2"
           strokeDasharray={filled ? undefined : '1 4'}
         />
@@ -37,7 +37,7 @@ export default function RadialMeter({ value, label, delay = 0, className }) {
             cx="50"
             cy="50"
             r="44"
-            stroke="#111111"
+            className="stroke-ink"
             strokeWidth="3"
             initial={{ pathLength: 0 }}
             whileInView={{ pathLength: pct / 100 }}

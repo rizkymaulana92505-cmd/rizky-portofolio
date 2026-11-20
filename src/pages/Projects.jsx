@@ -18,7 +18,7 @@ import ProjectPreview from '@/components/project/ProjectPreview';
 function EmptyState({ noData, onReset }) {
   return (
     <Reveal className="border border-dashed border-line-strong px-6 py-16 text-center md:py-24">
-      <p aria-hidden className="font-display text-[clamp(5rem,16vw,12rem)] font-extrabold leading-none tracking-[-0.06em] text-transparent [-webkit-text-stroke:1px_#111111] font-stretch-display">
+      <p aria-hidden className="font-display text-[clamp(5rem,16vw,12rem)] font-extrabold leading-none tracking-[-0.06em] text-transparent text-stroke-ink font-stretch-display">
         0
       </p>
       <h2 className="mt-6 font-display text-display-sm uppercase">

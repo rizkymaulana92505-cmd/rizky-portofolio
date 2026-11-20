@@ -7,7 +7,7 @@ export function describePublicError(error) {
     return 'Tidak dapat terhubung ke server. Periksa koneksi internet kamu.';
   }
   if (code === '42501' || code === 'PGRST301') return 'Permintaan ditolak oleh server.';
-  if (code === '23514') return 'Isian tidak memenuhi aturan server. Periksa kembali nama, email, dan isi pesan.';
+  if (code === '23514') return 'Isian tidak memenuhi aturan server. Periksa kembali isian kamu.';
   if (code === '23505') return 'Data tersebut sudah ada.';
   return 'Terjadi kesalahan pada server. Coba lagi beberapa saat lagi.';
 }

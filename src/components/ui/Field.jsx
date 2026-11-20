@@ -33,6 +33,7 @@ export default function Field({
   error,
   hint,
   counter,
+  suffix,
   required,
   className,
   ...rest
@@ -52,14 +53,17 @@ export default function Field({
           </span>
         )}
       </div>
-      <Tag
-        id={id}
-        required={required}
-        aria-invalid={error ? 'true' : undefined}
-        aria-describedby={describedBy}
-        className={cn(control, error ? 'border-ink' : 'border-line-strong', Tag === 'textarea' && 'min-h-[9rem] resize-y')}
-        {...rest}
-      />
+      <div className="relative">
+        <Tag
+          id={id}
+          required={required}
+          aria-invalid={error ? 'true' : undefined}
+          aria-describedby={describedBy}
+          className={cn(control, error ? 'border-ink' : 'border-line-strong', Tag === 'textarea' && 'min-h-[9rem] resize-y', suffix && 'pr-9')}
+          {...rest}
+        />
+        {suffix && <span aria-hidden className="label pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 text-ink">{suffix}</span>}
+      </div>
       <FieldMessage id={id} error={error} hint={hint} />
     </div>
   );

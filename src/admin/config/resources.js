@@ -180,14 +180,14 @@ const skills = {
     { name: 'name', label: 'Nama keahlian', type: 'text', required: true, maxLength: 80 },
     { name: 'category', label: 'Jenis', type: 'select', required: true, defaultValue: 'hard', options: opts(skillCategories) },
     { name: 'group_name', label: 'Kelompok', type: 'text', required: true, maxLength: 80, hint: 'Mis. Frontend, Backend, Komunikasi.' },
-    { name: 'level', label: 'Level (0–100)', type: 'number', integer: true, min: 0, max: 100, hint: 'Kosongkan bila tidak ingin menampilkan level.' },
+    { name: 'level', label: 'Persentase penguasaan', type: 'number', integer: true, min: 0, max: 100, suffix: '%', hint: 'Isi 0–100. Kosongkan bila belum ingin menampilkan persentase.' },
     SORT,
     PUBLISHED,
   ],
   listItem: (r) => ({
     title: r.name,
     subtitle: r.group_name,
-    badges: [{ label: labelOf(skillCategories, r.category) }, ...(r.level != null ? [{ label: `Level ${r.level}` }] : [])],
+    badges: [{ label: labelOf(skillCategories, r.category) }, ...(r.level != null ? [{ label: `${r.level}%` }] : [])],
   }),
 };
 
@@ -268,7 +268,7 @@ const certificates = {
 /* ── Testimoni ──────────────────────────────────────────────────────────── */
 const testimonials = {
   key: 'testimonials', path: 'testimoni', label: 'Testimoni', singular: 'testimoni', icon: Quote,
-  description: 'Hanya masukkan testimoni asli yang sudah disetujui pemberinya.',
+  description: 'Hanya masukkan testimoni asli yang sudah disetujui pemberinya. Kiriman pengunjung masuk sebagai draf — periksa lalu terbitkan.',
   service: createCrudService({
     table: 'testimonials',
     select: `id, type, name, role, organization, message, photo_path, sort_order, is_published, ${STAMPS}`,
@@ -284,7 +284,7 @@ const testimonials = {
     { name: 'message', label: 'Isi testimoni', type: 'textarea', required: true, rows: 5, maxLength: 2000 },
     { name: 'photo_path', label: 'Foto pemberi testimoni (opsional)', type: 'image', bucket: 'testimonial' },
     SORT,
-    { ...PUBLISHED, hint: 'Terbitkan hanya setelah pemberi testimoni menyetujui.' },
+    { ...PUBLISHED, hint: 'Kiriman pengunjung masuk sebagai draf. Terbitkan hanya setelah isinya diverifikasi.' },
   ],
   listItem: (r) => ({
     title: r.name,

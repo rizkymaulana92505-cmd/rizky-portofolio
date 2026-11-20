@@ -9,6 +9,7 @@ import { ease } from '@/lib/motion';
 import { cn } from '@/lib/cn';
 import Container from '@/components/ui/Container';
 import Button from '@/components/ui/Button';
+import ThemeToggle from '@/components/ui/ThemeToggle';
 
 export default function Navbar() {
   const site = useSite();
@@ -80,19 +81,23 @@ export default function Navbar() {
                 )}
               </NavLink>
             ))}
+            <ThemeToggle />
             <Button to="/cv" variant={pathname === '/cv' ? 'primary' : 'outline'} size="sm">CV</Button>
           </nav>
 
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-controls="menu-seluler"
-            aria-label={open ? 'Tutup menu' : 'Buka menu'}
-            className="flex h-10 w-10 items-center justify-center border border-ink transition-colors duration-300 hover:bg-ink hover:text-paper lg:hidden"
-          >
-            {open ? <X size={18} strokeWidth={1.5} /> : <Menu size={18} strokeWidth={1.5} />}
-          </button>
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle />
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-controls="menu-seluler"
+              aria-label={open ? 'Tutup menu' : 'Buka menu'}
+              className="flex h-10 w-10 items-center justify-center border border-ink transition-colors duration-300 hover:bg-ink hover:text-paper"
+            >
+              {open ? <X size={18} strokeWidth={1.5} /> : <Menu size={18} strokeWidth={1.5} />}
+            </button>
+          </div>
         </Container>
 
         {/* progres baca halaman */}

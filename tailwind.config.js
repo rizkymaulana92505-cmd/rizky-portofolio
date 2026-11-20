@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
+  darkMode: 'class',
   theme: {
     // Responsive breakpoints
     screens: {
@@ -12,13 +13,13 @@ export default {
       '2xl': '1536px',
     },
     extend: {
-      // Colour tokens — satu-satunya palet; tanpa dark mode
+      // Colour tokens — satu palet untuk light & dark (nilai ada di index.css)
       colors: {
-        paper: '#FAFAFA',
-        ink: { DEFAULT: '#111111', soft: '#3D3D3D' },
-        mute: '#8A8A8A',
-        fog: '#F0F0F0',
-        line: { DEFAULT: '#E3E3E3', strong: '#CFCFCF' },
+        paper: 'rgb(var(--color-paper) / <alpha-value>)',
+        ink: { DEFAULT: 'rgb(var(--color-ink) / <alpha-value>)', soft: 'rgb(var(--color-ink-soft) / <alpha-value>)' },
+        mute: 'rgb(var(--color-mute) / <alpha-value>)',
+        fog: 'rgb(var(--color-fog) / <alpha-value>)',
+        line: { DEFAULT: 'rgb(var(--color-line) / <alpha-value>)', strong: 'rgb(var(--color-line-strong) / <alpha-value>)' },
       },
       fontFamily: {
         display: ['Archivo', 'Helvetica Neue', 'Arial', 'sans-serif'],

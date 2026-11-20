@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import GridGuides from '@/components/layout/GridGuides';
 import BackToTop from '@/components/layout/BackToTop';
+import TestimonialLauncher from '@/components/credential/TestimonialLauncher';
 import Loading from '@/components/ui/Loading';
 import { SiteProvider } from '@/hooks/useSite';
 
@@ -26,6 +27,7 @@ export default function MainLayout() {
         </Suspense>
       </main>
       <Footer />
+      <TestimonialLauncher />
       <BackToTop />
     </div>
     </SiteProvider>

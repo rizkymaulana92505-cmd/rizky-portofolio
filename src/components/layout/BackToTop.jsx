@@ -25,7 +25,7 @@ export default function BackToTop() {
           className="group fixed bottom-5 right-5 z-30 flex h-12 w-12 items-center justify-center rounded-full bg-paper text-ink transition-colors duration-300 hover:bg-ink hover:text-paper md:bottom-8 md:right-8"
         >
           <svg aria-hidden viewBox="0 0 48 48" fill="none" className="absolute inset-0 h-full w-full -rotate-90">
-            <circle cx="24" cy="24" r="23" stroke="#CFCFCF" strokeWidth="1" />
+            <circle cx="24" cy="24" r="23" className="stroke-line-strong" strokeWidth="1" />
             <motion.circle
               cx="24"
               cy="24"

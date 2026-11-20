@@ -1,22 +1,26 @@
 import { useMemo, useState } from 'react';
+import { PenLine } from 'lucide-react';
 import {
   achievementCategories,
   certificateCategories,
   testimonialTypes,
 } from '@/data';
-import { getAchievements, getCertificates, getTestimonials } from '@/services/portfolioService';
+import { getAchievements, getCertificates, getTestimonials, submitTestimonial } from '@/services/portfolioService';
+import { usesSupabaseData } from '@/lib/supabaseConfig';
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { achievementView, certificateView, sortByDateDesc } from '@/lib/credentials';
 import PageHeader from '@/components/layout/PageHeader';
 import Container from '@/components/ui/Container';
 import ContentBlock from '@/components/ui/ContentBlock';
 import DataBoundary from '@/components/ui/DataBoundary';
+import Button from '@/components/ui/Button';
 import Tabs from '@/components/ui/Tabs';
 import TextLink from '@/components/ui/TextLink';
 import Placeholder from '@/components/ui/Placeholder';
 import CredentialCard from '@/components/credential/CredentialCard';
 import CredentialLightbox from '@/components/credential/CredentialLightbox';
 import TestimonialItem from '@/components/credential/TestimonialItem';
+import TestimonialForm from '@/components/credential/TestimonialForm';
 
 const sections = [
   { id: 'sertifikat-daftar', index: '01', label: 'Sertifikat' },
@@ -68,6 +72,7 @@ function CredentialSection({ items, categories, layoutId, emptyText }) {
 
 function Testimonials({ data }) {
   const [type, setType] = useState('all');
+  const [writing, setWriting] = useState(false);
   const tabs = [
     { key: 'all', label: 'Semua', count: data.filter((t) => !t.placeholder).length },
     ...testimonialTypes.map((t) => ({
@@ -80,7 +85,28 @@ function Testimonials({ data }) {
 
   return (
     <>
-      <Tabs tabs={tabs} value={type} onChange={setType} label="Filter jenis testimoni" layoutId="tab-testimoni" />
+      <div className="flex flex-col gap-5 border border-ink p-5 md:flex-row md:items-center md:justify-between">
+        <p className="max-w-2xl text-small text-ink-soft">
+          Pernah bekerja atau berinteraksi dengan saya? Bagikan pengalamanmu. Testimoni akan ditinjau pemilik portofolio sebelum ditampilkan.
+        </p>
+        <Button onClick={() => setWriting((v) => !v)} size="sm" className="shrink-0" aria-expanded={writing}>
+          <PenLine size={14} strokeWidth={1.75} aria-hidden />
+          {writing ? 'Tutup formulir' : 'Tulis testimoni'}
+        </Button>
+      </div>
+
+      {writing && (
+        <TestimonialForm
+          className="mt-6"
+          onSubmit={submitTestimonial}
+          simulated={!usesSupabaseData}
+          onClose={() => setWriting(false)}
+        />
+      )}
+
+      <div className="mt-12">
+        <Tabs tabs={tabs} value={type} onChange={setType} label="Filter jenis testimoni" layoutId="tab-testimoni" />
+      </div>
       <div key={type} className="mt-12 grid grid-cols-12 gap-x-4 gap-y-14 md:mt-16 md:gap-y-20">
         {shown.map((item, i) => {
           const meta = testimonialTypes.find((t) => t.key === item.type);
